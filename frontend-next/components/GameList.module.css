@@ -1,0 +1,134 @@
+.logo {
+    max-width: 25%;
+    height: auto;
+    margin: 0 auto;
+    display: block;
+}
+  
+.container {
+    width: 95%;
+    margin: auto;
+    padding: 20px;
+    background-color: #3b3b3b;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+  
+.search-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+  
+.search-container input[type="text"],
+.search-container button {
+    font-size: 14px; /* Increase font size */
+    padding: 10px; /* Increase padding */
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+  
+.search-container input[type="text"] {
+    width: 240px;
+}
+  
+.search-container button {
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}
+  
+.search-container button:hover {
+    background-color: #0056b3;
+}
+  
+.gamesTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.gamesTable th,
+.gamesTable td {
+    padding: 14px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.gamesTable th {
+    background-color: #4caf50;
+    color: white;
+}
+
+.gamesTable tr:hover {
+    background-color: #575757;
+}
+
+.sortButtons {
+    margin-bottom: 20px;
+}
+
+.sortButtons button {
+    font-size: 14px;
+    padding: 10px;
+    margin: 5px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.sortButtons button:hover {
+    background-color: #0056b3;
+}
+  
+.clickable-title {
+    color: #007bff;
+    cursor: pointer;
+    text-decoration: underline;
+}
+  
+.artwork-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+  
+.artwork-image {
+    max-width: 90vw; /* Adjust these values to fit your needs */
+    max-height: 90vh;
+    width: auto;
+    height: auto;
+    border-radius: 10px;
+}
+  
+.close-button {
+    position: absolute;
+    top: 0px;
+    right: 20px;
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
+}
+  
+.button-container {
+    display: flex;
+    gap: 10px;
+}
+  
+.no-results-message {
+    color: white;
+    margin-top: 20px;
+    font-size: 18px;
+}
+  

@@ -1,20 +1,20 @@
 {
   "name": "game-archive",
   "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "frontend-next"
+  ],
   "scripts": {
-    "heroku-postbuild": "npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend",
-    "start": "node backend/server.js"
+    "heroku-postbuild": "npm run build -w frontend-next",
+    "start": "npm start -w backend",
+    "dev:backend": "npm start -w backend",
+    "dev:frontend": "npm run dev -w frontend-next",
+    "build:frontend": "npm run build -w frontend-next"
   },
   "engines": {
-    "node": "20.12.1",
-    "npm": "10.8.2"
-  },
-  "devDependencies": {
-    "@babel/plugin-transform-class-properties": "^7.25.4",
-    "@babel/plugin-transform-nullish-coalescing-operator": "^7.24.7",
-    "@babel/plugin-transform-numeric-separator": "^7.24.7",
-    "@babel/plugin-transform-optional-chaining": "^7.24.8",
-    "@babel/plugin-transform-private-property-in-object": "^7.24.7",
-    "@babel/preset-react": "^7.24.7"
+    "node": ">=20.12.1",
+    "npm": ">=10"
   }
 }

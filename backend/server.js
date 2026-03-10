@@ -1,12 +1,11 @@
 // Load environment variables from .env file
 require('dotenv').config();
 
-// Import necessary modules
+// Import necessary modules (CommonJS)
 const express = require('express');
 const mysql = require('mysql2/promise');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const path = require('path');
 
 // Create an instance of express for our app
 const app = express();
@@ -21,8 +20,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Middleware to enable CORS (Cross-Origin Resource Sharing)
+const allowedOrigin = process.env.FRONTEND_ORIGIN || 'http://localhost:3000';
 app.use(cors({
-    origin: 'http://localhost:3000', // Allow requests from this origin
+    origin: allowedOrigin,
     methods: 'GET,POST,PUT,DELETE',
     credentials: true,
 }));
@@ -69,22 +69,18 @@ app.get('/api/performance', (req, res) => {
     });
 });
 
-// Serve static files from the "public" and "game images" directories
-app.use(express.static(path.join(__dirname, 'public')));
-app.use('/game-images', express.static(path.join(__dirname, 'game images')));
-
 // Function to start the server and handle database connection
 async function startServer() {
     try {
         // Create a connection to the MySQL database using configuration from environment variables
+        const host = process.env.DB_HOST || 'localhost';
+        const isLocal = host === 'localhost' || host === '127.0.0.1';
         const connection = await mysql.createConnection({
-            host: process.env.DB_HOST,
+            host,
             user: process.env.DB_USER,
             password: process.env.DB_PASSWORD,
             database: process.env.DB_NAME,
-            ssl: {
-              rejectUnauthorized: false
-            }
+            ...(isLocal ? {} : { ssl: { rejectUnauthorized: false } }),
           });          
 
         console.log('Connected to MySQL Server!');
@@ -168,16 +164,6 @@ async function startServer() {
                 res.status(500).json({ error: 'Database error' });
             }
         });
-
-        // Serve React frontend in production
-        if (process.env.NODE_ENV === 'production') {
-            console.log('Serving React frontend');
-            app.use(express.static(path.join(__dirname, '../frontend/build')));
-        
-            app.get('*', (req, res) => {
-                res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
-            });
-        }
 
         // Start the server
         app.listen(port, () => {
